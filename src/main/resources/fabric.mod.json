@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "staminamod",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Better When Running",
+  "description": "A stamina mod for Better than Adventure. Aims to add an implementation of sprinting that fits with the philosophy of beta 1.7.3, adding a stamina bar instead of a hunger bar.",
   "authors": [
-    "Turnip Labs"
+    "JamDoggie"
   ],
   "contact": {
     "homepage": "",
@@ -19,20 +19,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+			"jamdoggie.staminamod.StaminaMod"
     ],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"jamdoggie.staminamod.StaminaMod"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"jamdoggie.staminamod.StaminaMod"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"jamdoggie.staminamod.StaminaMod"
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+    "staminamod.mixins.json"
   ],
 
   "depends": {
