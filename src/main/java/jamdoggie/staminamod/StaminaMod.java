@@ -1,6 +1,7 @@
 package jamdoggie.staminamod;
 
 import jamdoggie.staminamod.hud.HudManager;
+import jamdoggie.staminamod.network.NetManager;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,12 @@ public class StaminaMod implements ModInitializer, GameStartEntrypoint, RecipeEn
     public static final String MOD_ID = "staminamod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final HudManager hudManager = new HudManager();
+	public static final NetManager netManager = new NetManager();
     @Override
     public void onInitialize() {
         LOGGER.info("Better When Running reporting for duty!");
 		hudManager.onInitialize();
+		netManager.onInitialize();
     }
 
 	@Override

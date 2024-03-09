@@ -1,15 +1,12 @@
 package jamdoggie.staminamod.hud;
 
-import jamdoggie.staminamod.mixininterfaces.IEntityPlayerSPMixin;
-import jamdoggie.staminamod.render.RenderUtils;
+import jamdoggie.staminamod.mixininterfaces.IEntityPlayerMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.hud.ComponentAnchor;
-import net.minecraft.client.gui.hud.HudComponent;
 import net.minecraft.client.gui.hud.Layout;
 import net.minecraft.client.gui.hud.MovableHudComponent;
-import net.minecraft.client.render.Tessellator;
 import net.minecraft.core.player.gamemode.Gamemode;
 import org.lwjgl.opengl.GL11;
 
@@ -35,7 +32,7 @@ public class StaminaBarComponent extends MovableHudComponent
 	@Override
 	public boolean isVisible(Minecraft mc)
 	{
-		IEntityPlayerSPMixin player = (IEntityPlayerSPMixin) mc.thePlayer;
+		IEntityPlayerMixin player = (IEntityPlayerMixin) mc.thePlayer;
 		return (player.getStamina() < 100f || mc.thePlayer.isSprinting()) && mc.gameSettings.immersiveMode.drawHotbar() && mc.thePlayer.getGamemode()
 			.equals(Gamemode.survival);
 	}
@@ -43,6 +40,8 @@ public class StaminaBarComponent extends MovableHudComponent
 	private void renderStaminaBar(Minecraft mc, Gui gui, int x, int y, float staminaFloat, boolean exhausted, float delta)
 	{
 		flashTime += 0.09f * delta;
+
+		GL11.glDisable(GL11.GL_BLEND);
 
 		if (!exhausted)
 			setColor(defaultColor);
@@ -54,8 +53,8 @@ public class StaminaBarComponent extends MovableHudComponent
 					0.0f),
 				1.0f)));
 
-		GL11.glBindTexture(3553, mc.renderEngine.getTexture(texture));
-		GL11.glDisable(3042);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture(texture));
+
 		gui.drawTexturedModalRect(x, y, 0, 0, width, height);
 		gui.drawTexturedModalRect(x, y, 0, height, (int) (staminaFloat * width), height);
 	}
@@ -72,9 +71,9 @@ public class StaminaBarComponent extends MovableHudComponent
 		int x = this.getLayout().getComponentX(mc, this, xSizeScreen);
 		int y = this.getLayout().getComponentY(mc, this, ySizeScreen);
 
-		IEntityPlayerSPMixin player = (IEntityPlayerSPMixin) mc.thePlayer;
+		IEntityPlayerMixin player = (IEntityPlayerMixin) mc.thePlayer;
 
-		renderStaminaBar(mc, gui, x, y, player.getStamina() / 100f, player.isExhausted(), partialTick);
+		renderStaminaBar(mc, gui, x, y, lerp(player.getPrevStamina() / 100f, player.getStamina() / 100f, partialTick), player.isExhausted(), partialTick);
 	}
 
 	@Override
@@ -98,5 +97,10 @@ public class StaminaBarComponent extends MovableHudComponent
 			(int) (a.getGreen() + (b.getGreen() - a.getGreen()) * t),
 			(int) (a.getBlue() + (b.getBlue() - a.getBlue()) * t),
 			(int) (a.getAlpha() + (b.getAlpha() - a.getAlpha()) * t));
+	}
+
+	public float lerp(float a, float b, float t)
+	{
+		return a + (b - a) * t;
 	}
 }
