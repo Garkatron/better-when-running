@@ -23,24 +23,31 @@ public class StaminaBarComponent extends MovableHudComponent
 	public Color flashColor = new Color(161, 35, 6, 255);
 
 	private float flashTime = 0.0f;
+	private long previousTime = 0;
 
 	public StaminaBarComponent(String key, int xSize, int ySize, Layout layout)
 	{
 		super(key, xSize, ySize, layout);
+		previousTime = System.currentTimeMillis();
 	}
 
 	@Override
 	public boolean isVisible(Minecraft mc)
 	{
 		IEntityPlayerMixin player = (IEntityPlayerMixin) mc.thePlayer;
+
+		if (player == null)
+			return true;
+
 		return (player.getStamina() < 100f || mc.thePlayer.isSprinting()) && mc.gameSettings.immersiveMode.drawHotbar() && mc.thePlayer.getGamemode()
 			.equals(Gamemode.survival);
 	}
 
-	private void renderStaminaBar(Minecraft mc, Gui gui, int x, int y, float staminaFloat, boolean exhausted, float delta)
+	private void renderStaminaBar(Minecraft mc, Gui gui, int x, int y, float staminaFloat, boolean exhausted, float partialTick)
 	{
-		flashTime += 0.09f * delta;
-
+		float delta = (System.currentTimeMillis() - previousTime) / 1000f;
+		flashTime += delta * 16f;
+		System.currentTimeMillis();
 		GL11.glDisable(GL11.GL_BLEND);
 
 		if (!exhausted)
@@ -74,6 +81,7 @@ public class StaminaBarComponent extends MovableHudComponent
 		IEntityPlayerMixin player = (IEntityPlayerMixin) mc.thePlayer;
 
 		renderStaminaBar(mc, gui, x, y, lerp(player.getPrevStamina() / 100f, player.getStamina() / 100f, partialTick), player.isExhausted(), partialTick);
+		previousTime = System.currentTimeMillis();
 	}
 
 	@Override

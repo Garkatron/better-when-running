@@ -4,17 +4,19 @@
   "package": "jamdoggie.staminamod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "EntityMixin",
     "EntityPlayerMixin",
-    "EntityMixin"
+    "GameSettingsMixin"
   ],
   "client": [
     "EntityPlayerSPMixin",
+    "MinecraftMixin",
     "NetClientHandlerMixin"
   ],
   "server": [
-    "NetServerHandlerMixin",
     "EntityPlayerMPMixin",
-    "NetLoginHandlerMixin"
+    "NetLoginHandlerMixin",
+    "NetServerHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

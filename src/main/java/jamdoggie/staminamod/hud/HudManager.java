@@ -9,10 +9,14 @@ import javax.swing.*;
 
 public class HudManager
 {
+	public String initialSettingsString;
+
 	public void onInitialize()
 	{
 		StaminaBarComponent staminaBar = new StaminaBarComponent("stamina", 182, 7,
 			new SnapLayout(HudComponents.HOTBAR, ComponentAnchor.TOP_LEFT, ComponentAnchor.BOTTOM_LEFT));
+
+		HudComponents.register(staminaBar);
 
 		if (HudComponents.HEALTH_BAR.getLayout() instanceof SnapLayout layout)
 			layout.setParent(staminaBar);
@@ -20,6 +24,6 @@ public class HudManager
 		if (HudComponents.ARMOR_BAR.getLayout() instanceof SnapLayout layout)
 			layout.setParent(staminaBar);
 
-		HudComponents.register(staminaBar);
+		initialSettingsString = HudComponents.INSTANCE.toSettingsString();
 	}
 }

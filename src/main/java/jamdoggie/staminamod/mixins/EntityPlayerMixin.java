@@ -99,11 +99,6 @@ public class EntityPlayerMixin extends EntityLiving implements IEntityPlayerMixi
 				this.setSprinting(false);
 			}
 		}
-
-		if (stamina != prevStamina)
-		{
-
-		}
 	}
 
 	@Unique
