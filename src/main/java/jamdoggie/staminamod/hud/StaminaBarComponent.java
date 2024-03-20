@@ -47,7 +47,7 @@ public class StaminaBarComponent extends MovableHudComponent
 	{
 		float delta = (System.currentTimeMillis() - previousTime) / 1000f;
 		flashTime += delta * 16f;
-		System.currentTimeMillis();
+
 		GL11.glDisable(GL11.GL_BLEND);
 
 		if (!exhausted)
