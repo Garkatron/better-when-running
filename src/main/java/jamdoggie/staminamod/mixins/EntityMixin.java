@@ -12,7 +12,7 @@ public class EntityMixin
 {
 	@Inject(method = "saveWithoutId", at = @At(value="INVOKE",
 		target = "Lnet/minecraft/core/entity/Entity;addAdditionalSaveData(Lcom/mojang/nbt/CompoundTag;)V",
-	shift = At.Shift.BEFORE))
+	shift = At.Shift.BEFORE), remap = false)
 	private void saveWithoutId(CompoundTag tag, CallbackInfo ci)
 	{
 

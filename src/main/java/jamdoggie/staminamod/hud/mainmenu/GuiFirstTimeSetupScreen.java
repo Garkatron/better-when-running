@@ -4,7 +4,7 @@ import jamdoggie.staminamod.StaminaMod;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.hud.HudComponents;
-import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.lang.I18n;
 import org.lwjgl.opengl.GL11;
 

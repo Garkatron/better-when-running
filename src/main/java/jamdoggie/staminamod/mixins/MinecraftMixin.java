@@ -21,7 +21,7 @@ public abstract class MinecraftMixin
 	@Shadow
 	public abstract void displayGuiScreen(GuiScreen guiscreen);
 
-	@Inject(method = "startGame", at = @At(value = "TAIL"))
+	@Inject(method = "startGame", at = @At(value = "TAIL"), remap = false)
 	private void startOfGameInit(CallbackInfo ci)
 	{
 		StaminaMod.options = (IStaminaSettings) gameSettings;

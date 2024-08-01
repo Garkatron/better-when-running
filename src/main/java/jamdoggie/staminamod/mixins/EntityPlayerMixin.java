@@ -44,28 +44,28 @@ public class EntityPlayerMixin extends EntityLiving implements IEntityPlayerMixi
 		return hurtSuccess;
 	}
 
-	@Inject(method = "onDeath", at = @At("TAIL"))
+	@Inject(method = "onDeath", at = @At("TAIL"), remap = false)
 	private void death(Entity entity, CallbackInfo ci)
 	{
 		stamina = 100;
 		exhausted = false;
 	}
 
-	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"), remap = false)
 	private void addAdditionalSaveData(CompoundTag tag, CallbackInfo ci)
 	{
 		tag.putFloat("Stamina", stamina);
 		tag.putBoolean("Exhausted", exhausted);
 	}
 
-	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"), remap = false)
 	private void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci)
 	{
 		stamina = tag.getFloat("Stamina");
 		exhausted = tag.getBoolean("Exhausted");
 	}
 
-	@Inject(method = "onLivingUpdate()V", at = @At("HEAD"))
+	@Inject(method = "onLivingUpdate()V", at = @At("HEAD"), remap = false)
 	private void playerTick(CallbackInfo ci)
 	{
 		prevStamina = stamina;

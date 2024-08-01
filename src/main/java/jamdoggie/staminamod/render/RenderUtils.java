@@ -1,7 +1,7 @@
 package jamdoggie.staminamod.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.tessellator.Tessellator;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.gui.Gui;
 
