@@ -21,7 +21,6 @@ public class StaminaMod implements ModInitializer, GameStartEntrypoint, RecipeEn
     @Override
     public void onInitialize() {
         LOGGER.info("Better When Running reporting for duty!");
-		hudManager.onInitialize();
 		netManager.onInitialize();
     }
 
@@ -32,6 +31,7 @@ public class StaminaMod implements ModInitializer, GameStartEntrypoint, RecipeEn
 
 	@Override
 	public void afterGameStart() {
+		hudManager.onInitialize();
 
 	}
 

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = net.minecraft.server.entity.player.EntityPlayerMP.class, remap = false)
-public class EntityPlayerMPMixin extends EntityPlayer
+public abstract class EntityPlayerMPMixin extends EntityPlayer
 {
 	@Shadow
 	public NetServerHandler playerNetServerHandler;
@@ -26,7 +26,7 @@ public class EntityPlayerMPMixin extends EntityPlayer
 		super(world);
 	}
 
-	@Inject(method = "onDeath", at = @At("TAIL"))
+	@Inject(method = "Lnet/minecraft/core/entity/player/EntityPlayer;onDeath(Lnet/minecraft/core/entity/Entity;)V", at = @At("TAIL"))
 	private void onDeath(Entity entity, CallbackInfo ci)
 	{
 		PacketSendStamina packet = new PacketSendStamina(100, false);
