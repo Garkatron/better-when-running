@@ -16,7 +16,7 @@ public class NetLoginHandlerMixin
 {
 	@Inject(method = "doLogin", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/server/entity/player/EntityPlayerMP;func_20057_k()V"
-	, shift = At.Shift.AFTER)
+	, shift = At.Shift.AFTER, remap = false)
 	)
 	private void doLogin(Packet1Login packet1login, CallbackInfo ci, @Local EntityPlayerMP entityplayermp)
 	{
