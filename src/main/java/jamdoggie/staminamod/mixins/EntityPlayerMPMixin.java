@@ -26,7 +26,7 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer
 		super(world);
 	}
 
-	@Inject(method = "Lnet/minecraft/core/entity/player/EntityPlayer;onDeath(Lnet/minecraft/core/entity/Entity;)V", at = @At("TAIL"))
+	@Inject(method = "onDeath", at = @At("TAIL"))
 	private void onDeath(Entity entity, CallbackInfo ci)
 	{
 		PacketSendStamina packet = new PacketSendStamina(100, false);

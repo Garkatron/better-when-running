@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = EntityPlayerSP.class, remap = false)
-public class EntityPlayerSPMixin extends EntityPlayer
+public abstract class EntityPlayerSPMixin extends EntityPlayer
 {
 	@Shadow
 	protected Minecraft mc;
